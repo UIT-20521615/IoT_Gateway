@@ -35,8 +35,7 @@ void loop() {
     if(WiFi.status()== WL_CONNECTED ){ 
       temperature = httpGETRequest(serverNameTemp);
       humidity = httpGETRequest(serverNameHumi);
-      Serial.println("Nhiet do: " + temperature + " *C");
-      Serial.println("Do am: " + humidity + " %");
+      Serial.println("Temperature: " + temperature + " *C - Humidity: " + humidity + " %");
     } else {
       Serial.println("WiFi Disconnected");
     }
