@@ -21,13 +21,11 @@ String readHumi() {
 }
 
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(115200); 
   Serial.println();
   
-  // Setting the ESP as an access point
   Serial.print("Setting AP (Access Point)…");
-  // Remove the password parameter, if you want the AP (Access Point) to be open
+
   WiFi.mode(WIFI_AP);
   WiFi.softAP(ssid, password);
 
@@ -44,7 +42,7 @@ void setup() {
       request->send_P(200, "text/plain", readHumi().c_str());
     }); 
     
-    // Start server
+
     server.begin();
 }
 

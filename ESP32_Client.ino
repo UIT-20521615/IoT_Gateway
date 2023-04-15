@@ -4,7 +4,6 @@
 const char* ssid = "ESP32-Access-Point";
 const char* password = "123456789";
 
-//Your IP address or domain name with URL path
 const char* serverNameTemp = "http://192.168.4.1/temperature";
 const char* serverNameHumi = "http://192.168.4.1/humidity";
 
@@ -33,11 +32,11 @@ void loop() {
   unsigned long currentMillis = millis();
   
   if(currentMillis - previousMillis >= interval) {
-     // Check WiFi connection status
     if(WiFi.status()== WL_CONNECTED ){ 
       temperature = httpGETRequest(serverNameTemp);
       humidity = httpGETRequest(serverNameHumi);
-      Serial.println("Temperature: " + temperature + " *C - Humidity: " + humidity + " %");
+      Serial.println("Nhiet do: " + temperature + " *C");
+      Serial.println("Do am: " + humidity + " %");
     } else {
       Serial.println("WiFi Disconnected");
     }
@@ -47,17 +46,15 @@ void loop() {
 String httpGETRequest(const char* serverName) {
   WiFiClient client;
   HTTPClient http;
-    
-  // Your Domain name with URL path or IP address with path
+
   http.begin(client, serverName);
   
-  // Send HTTP POST request
   int httpResponseCode = http.GET();
   
   String payload = "--"; 
   
   if (httpResponseCode>0) {
-    Serial.print("HTTP Response code: ");
+    Serial.print("Gateway HTTP Response: ");
     Serial.println(httpResponseCode);
     payload = http.getString();
   }
@@ -65,7 +62,7 @@ String httpGETRequest(const char* serverName) {
     Serial.print("Error code: ");
     Serial.println(httpResponseCode);
   }
-  // Free resources
+
   http.end();
 
   return payload;
