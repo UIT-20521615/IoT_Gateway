@@ -36,6 +36,7 @@ void loop() {
       temperature = httpGETRequest(serverNameTemp);
       humidity = httpGETRequest(serverNameHumi);
       Serial.println("Temperature: " + temperature + " *C - Humidity: " + humidity + " %");
+      previousMillis = currentMillis;
     } else {
       Serial.println("WiFi Disconnected");
     }
